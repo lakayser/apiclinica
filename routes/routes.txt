@@ -1,0 +1,22 @@
+MODERADOR (CRUD) 'Requiere iniciar sesion con rol MODERATOR'
+
+Listar usuarios     (GET):     https://botmila-api.herokuapp.com/botmilaAPI/moderator/list-users
+Registrar Usuarios  (POST):    https://botmila-api.herokuapp.com/botmilaAPI/moderator/register-users
+Eliminar Usuarios   (DELETE):  https://botmila-api.herokuapp.com/botmilaAPI/moderator/delete-user/(:id)
+Editar Usuarios     (PUT):     https://botmila-api.herokuapp.com/botmilaAPI/moderator/edit-user/(:id)
+
+
+HORAS (CRUD) 'Requiere iniciar sesion con rol MODERATOR'
+
+Agregar horas     (POST)   https://botmila-api.herokuapp.com/botmilaAPI/moderator/create-hours
+Listar las horas  (GET)    https://botmila-api.herokuapp.com/botmilaAPI/moderator/list-hours
+Edita las horas   (PUT)    https://botmila-api.herokuapp.com/botmilaAPI/moderator/edit-hours/:id
+Elimina las horas (DELETE) https://botmila-api.herokuapp.com/botmilaAPI/moderator/delete-hours/:id
+
+
+ADMIN (CRUD) 'Requiere iniciar sesion con rol ADMIN'
+
+Agregar Moderators (POST)   https://botmila-api.herokuapp.com/botmilaAPI/admin/register-moderators
+Listar Usuarios    (GET)    https://botmila-api.herokuapp.com/botmilaAPI/admin/list-users
+Eliminar Usuarios  (DELETE) https://botmila-api.herokuapp.com/botmilaAPI/admin/delete-users/:id
+Editar Usuarios    (PUT)    https://botmila-api.herokuapp.com/botmilaAPI/admin/edit-users/:id
