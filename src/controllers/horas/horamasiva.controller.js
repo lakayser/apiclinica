@@ -24,7 +24,7 @@ export const addHora = async (req, res) => {
             } else {
                 const cargaMasiva = new CargaMasiva({
                     fecha: moment(prueba).format(),
-                    dia: moment(prueba).format('LLLL'),
+                    dia: moment(prueba).format('dddd'),
                     hora: moment(prueba).format('LT'),
                     disponibilidad: true,
                     semana: moment(prueba).format('w'),
