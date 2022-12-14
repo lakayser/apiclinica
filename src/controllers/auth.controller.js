@@ -36,6 +36,13 @@ export const signUp = async (req, res) => {
 }
 export const signIn = async (req, res) => {
     const userFound = await User.findOne({nameUser: req.body.nameUser}).populate("roles")
+    const userFound2 = await User.find({nameUser: req.body.nameUser});
+
+    console.log(userFound)
+
+    const rl  = userFound.map(rol => rol.roles);
+
+    const rol          = rl.toString(rl);
 
     if (!userFound) return res.status(400).json({message: "Usuario no encontrado"})
     // console.log(userFound);
@@ -47,6 +54,5 @@ export const signIn = async (req, res) => {
     const token = jwt.sign({id: userFound._id}, config.SECRET, {
         expiresIn: 86400
     })
-
-    res.json({token})
+    res.json({token, rol})
 }

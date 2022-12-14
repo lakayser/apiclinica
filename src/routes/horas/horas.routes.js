@@ -5,7 +5,7 @@ import * as Horas from '../../controllers/horas/horamasiva.controller';
 import * as Tomar from '../../controllers/horas/agendar-hora.controller';
 import * as Paciente from '../../controllers/atenciones/paciente.controller';
 import * as Atencion from '../../controllers/atenciones/atencion.controller';
-
+import * as Inventario from '../../controllers/crudUsuarios/inventario.controller'
 // CRUD horasMasivas
 router.post     ('/Crear-horas',                Horas.addHora)
 router.get      ('/listar-horas',               Horas.listarhoras)
@@ -22,9 +22,13 @@ router.delete   ('/eliminar-reserva/:id',   Tomar.eliminarReserva)
 // CRUD Pacientes
 router.post     ('/registrar-paciente', Paciente.agregarPaciente)
 router.get      ('/listar-pacientes',   Paciente.listarPacientes)
-router.delete   ('/eliminar-paciente',  Paciente.eliminarPaciente)
-router.put      ('/editar-paciente',    Paciente.editarPaciente)
+router.delete   ('/eliminar-paciente/:id',  Paciente.eliminarPaciente)
+router.put      ('/editar-paciente/:id',    Paciente.editarPaciente)
 //CRUD atenciones
 router.post     ('/registrar-atencion',     Atencion.formulario)
 router.get      ('/listar-atenciones',      Atencion.listarAtenciones)
+router.get      ('/listar-atencion/:id',    Atencion.listarAtencionEspecifica )
+//CRUD Inventario
+router.post     ('/agregar-articulo',  Inventario.agregarObjeto)
+router.get      ('/listar-articulos',  Inventario.listarInventario)
 export default router;
