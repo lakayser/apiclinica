@@ -21,6 +21,7 @@ export const agendarHora = async (req, res) => {
 }
 export const listarReserva = async (req, res) => {
     const data = await HoraTomada.find({}).populate("horaTomada")
+    console.log(data)
     if (data) {
         res.status(200).json(data)
     } else {
@@ -63,5 +64,15 @@ export const eliminarReserva = async (req, res) => {
 
     } else {
         res.status(400).json({ message: "La reserva no existe" })
+    }
+}
+export const graficoReserva = async (req,res)=>{
+    const data = await HoraTomada.find().populate("horaTomada")
+    
+    
+    if (data){
+        console.log(data.length)
+    }else{
+        console.log(xd)
     }
 }

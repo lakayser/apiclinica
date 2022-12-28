@@ -33,6 +33,7 @@ export const signUp = async (req, res) => {
     })
 
     res.status(200).json({token})
+  
 }
 export const signIn = async (req, res) => {
     const userFound = await User.findOne({nameUser: req.body.nameUser}).populate("roles")
@@ -43,7 +44,7 @@ export const signIn = async (req, res) => {
     const rl  = userFound.map(rol => rol.roles);
 
     const rol          = rl.toString(rl);
-
+    console.log(rol)
     if (!userFound) return res.status(400).json({message: "Usuario no encontrado"})
     // console.log(userFound);
 
@@ -54,5 +55,6 @@ export const signIn = async (req, res) => {
     const token = jwt.sign({id: userFound._id}, config.SECRET, {
         expiresIn: 86400
     })
-    res.json({token, rol})
+    
+    res.json({token, rl})
 }

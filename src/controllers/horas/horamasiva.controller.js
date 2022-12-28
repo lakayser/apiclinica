@@ -114,3 +114,14 @@ export const eliminarHora = async (req, res) => {
         res.status(400).json({ message: "Hora no encontrada" })
     }
 }
+export const scheduleList = async (req,res) =>{
+    const data = req.params.semana;
+
+    const data2 = await CargaMasiva.find({semana: data});
+    
+    if (data2.length > 0) {
+        res.json(data2);
+    } else {
+        res.status(404).json({ Message: "No hay datos en los parámetros asignados"})
+    }
+}

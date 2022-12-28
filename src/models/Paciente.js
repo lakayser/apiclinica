@@ -6,10 +6,7 @@ const pacienteSchema = new Schema({
     numeroContacto:     String,
     numeroEmergencia:   String,
     rut:                String,
-    Atenciones: [{
-        type: Schema.Types.ObjectId,
-        ref: "Atenciones"
-    }]
+    enfermedadR:        String
 
 })
 

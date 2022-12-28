@@ -1,12 +1,21 @@
 import Atenciones from "../../models/Atenciones";
+import Paciente from "../../models/Paciente";
 
 export const formulario = async (req,res)=>{
-    const { enfermedadR, observaciones, tratamiento, nombre, Edad, numeroContacto, numeroEmergencia, rut} = req.body;
-    const atencion = new Atenciones({ enfermedadR, observaciones, tratamiento, nombre, Edad, numeroContacto, numeroEmergencia, rut})
-     
+
+    const {  observaciones, tratamiento, procedimiento} = req.body;
+    const id = req.params.id
+    const data = await Paciente.find({_id: id})
+    console.log(data)
+    if(data){
+        const atencion = new Atenciones({  observaciones, tratamiento, procedimiento, paciente: req.params.id})
     await atencion.save()
     
      res.status(200).json("Atencion guardada con exito")
+    } else{
+        res.json("Error al guardad Atencion")
+    }
+    
 
 }
 

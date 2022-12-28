@@ -1,14 +1,13 @@
 import { Schema, model } from 'mongoose'
 
 const atencionesSchema = new Schema({
-    enfermedadR:        String,
     observaciones:      String,
     tratamiento:        String,
-    nombre:             String,
-    Edad:               String,
-    numeroContacto:     String,
-    numeroEmergencia:   String,
-    rut:                String,
+    procedimiento:      String,
+    paciente: [{
+        type: Schema.Types.ObjectId,
+        ref: "Paciente"
+    }]
 })
 
 export default model('Atenciones', atencionesSchema);

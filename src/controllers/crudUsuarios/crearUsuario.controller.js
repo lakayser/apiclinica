@@ -32,7 +32,13 @@ export const signUp = async (req, res) => {
     res.status(200).json({message: "Usuario Creado con Exito"})
 }
 export const signIn = async (req, res) => {
-    const userFound = await User.findOne({nameUser: req.body.nameUser}).populate("roles")
+    const userFound = await User.findOne({userName: req.body.userName}).populate("roles")
+    const userFound2 = await User.find({userName: req.body.userName})
+    
+    const rol = userFound2.map(rol=>rol.roles)
+    // const rl  = userFound.map(rol => rol.roles);
+
+    const rolx          = rol.toString(rol);
 
     if (!userFound) return res.status(400).json({message: "Usuario no encontrado"})
     // console.log(userFound);
@@ -45,7 +51,7 @@ export const signIn = async (req, res) => {
         expiresIn: 86400
     })
 
-    res.json({token})
+    res.json({token, rolx})
 }
 
 export const listUsers  = async (req, res) => {
