@@ -1,3 +1,4 @@
+import moment from 'moment/moment';
 import { validateRUT, getCheckDigit, generateRandomRUT } from 'validar-rut'
 import CargaMasiva from '../../models/CargaMasiva';
 import HoraTomada from '../../models/HoraTomada';
@@ -5,20 +6,24 @@ import HoraTomada from '../../models/HoraTomada';
 
 export const agendarHora = async (req, res) => {
     const { nombre, rut, numero } = req.body
-
     const id = req.params.id
+    const validarRut = validateRUT(rut)
     
-    const data = await CargaMasiva.find({ _id: id, disponibilidad: true })
-    if (data) {
-        const horatomada = new HoraTomada({ nombre, rut, numero, horaTomada: req.params.id, estado: true })
-        await horatomada.save()
-        const reservar = await CargaMasiva.findByIdAndUpdate(id, { disponibilidad: false })
-        res.json("Hora agendada correctamente")
-
+    if (validarRut) {
+        const data = await CargaMasiva.find({ _id: id, disponibilidad: true })
+        if (data) {
+            const horatomada = new HoraTomada({ nombre, rut, numero, horaTomada: req.params.id, estado: true })
+            await horatomada.save()
+            const reservar = await CargaMasiva.findByIdAndUpdate(id, { disponibilidad: false })
+            res.json("Hora agendada correctamente")
+    
+        } else {
+            res.json("Error al agendar horas")
+        }
     } else {
-        res.json("Error al agendar horas")
+        res.json("El rut ingresado no es válido")
     }
-}
+    }
 export const listarReserva = async (req, res) => {
     const data = await HoraTomada.find({}).populate("horaTomada")
     console.log(data)
@@ -67,12 +72,21 @@ export const eliminarReserva = async (req, res) => {
     }
 }
 export const graficoReserva = async (req,res)=>{
-    const data = await HoraTomada.find().populate("horaTomada")
+    const ultimoMes = moment().subtract(30, 'days')
+    const data = await HoraTomada.find({}).populate("horaTomada")
     
-    
+    const array = []
+    data.forEach(element => {
+      if (element.horaTomada[0].fecha2 > ultimoMes) {
+        array.push(element)
+      }
+    });
+    console.log(array.length)
     if (data){
-        console.log(data.length)
+        res.status(200).json(array.length)
+        console.log(data)
     }else{
-        console.log(xd)
+        res.status(400).json("nao funciona manito")
+       
     }
 }
